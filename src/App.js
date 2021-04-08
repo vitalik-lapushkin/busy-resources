@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./components/Header";
+import RouterPaths from './components/RouterPaths';
+import "./App.css";
 
 function App() {
+  const isLoggedIn = false;
+  const routes = Object
+    .values(RouterPaths)
+    .map((path) => {
+      const Component = path.component;
+      return (
+        <Route key={path.name} path={path.path}>
+          <Component />
+        </Route>
+      );
+    });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header isLoggedIn={isLoggedIn}></Header>
+        <Switch>
+          {routes}
+        </Switch>
+      </Router>
     </div>
   );
 }
