@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
-import RouterPaths from './components/RouterPaths';
+import RouterPaths from './router/RouterPaths';
 import "./App.css";
 
 function App() {
@@ -16,14 +16,14 @@ function App() {
       );
     });
   return (
-    <div className="App">
-      <Router>
+    <Router>
+      <div className="App">
         <Header isLoggedIn={isLoggedIn}></Header>
         <Switch>
           {routes}
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 

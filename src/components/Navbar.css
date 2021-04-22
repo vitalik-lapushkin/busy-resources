@@ -5,6 +5,6 @@
   font-weight: bold;
 }
 
-.br_navbar__item:hover {
+.br_navbar__item.active {
   text-decoration: underline;
 }
