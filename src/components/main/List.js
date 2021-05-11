@@ -1,7 +1,7 @@
 import ListItem from './ListItem';
 
 function List({ items, onChangeList }) {
-  const onChange = (title) => {
+  const onChangeChecked = (title) => {
     const newItems = items.map(item => item.title === title
       ? { ...item, isChecked: !item.isChecked}
       : item);
@@ -14,7 +14,7 @@ function List({ items, onChangeList }) {
   return (
     <ul style={ {listStyleType: 'none'} }>
       {items.map(item =>
-        <ListItem key={item.title} isChecked={item.isChecked} title={item.title} onChange={onChange} onRemove={onRemove}/>)}
+        <ListItem key={item.title} isChecked={item.isChecked} title={item.title} onCheckChecked={() => onChangeChecked(item.title)} onRemove={onRemove}/>)}
     </ul>
   );
 }

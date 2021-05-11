@@ -1,7 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import RouterPaths from './router/RouterPaths';
+import StylesContext from './context/StylesContext';
 import "./App.css";
+
+const primaryColor = '#6200ee';
+const primaryTextColor = '#fff';
 
 function App() {
   const isLoggedIn = false;
@@ -17,12 +21,14 @@ function App() {
     });
   return (
     <Router>
-      <div className="App">
-        <Header isLoggedIn={isLoggedIn}></Header>
-        <Switch>
-          {routes}
-        </Switch>
-      </div>
+      <StylesContext.Provider value={{primaryColor, primaryTextColor}}>
+        <div className="App">
+          <Header isLoggedIn={isLoggedIn}></Header>
+          <Switch>
+            {routes}
+          </Switch>
+        </div>
+      </StylesContext.Provider>
     </Router>
   );
 }

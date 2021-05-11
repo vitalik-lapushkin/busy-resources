@@ -1,14 +1,40 @@
-import "./ListItem.css";
+import { useContext } from 'react';
+import styled from 'styled-components'
+import StylesContext from '../../context/StylesContext';
+import CustomeCheckbox from '../common/CustomeCheckbox';
 
-function ListItem({ isChecked, title, onChange, onRemove }) {
+const Li = styled.li`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const ItemTitle = styled.span`
+  margin-right: 10px;
+`;
+
+const RemoveButton = styled.button`
+  background-color: ${props => props.primaryColor};
+  color: ${props => props.primaryTextColor};
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+`;
+
+function ListItem({ isChecked, title, onChangeChecked, onRemove }) {
+  const { primaryColor, primaryTextColor } = useContext(StylesContext);
   return (
-    <li className="list__item">
-      <label className="list__item__checkbox">
-        <input type="checkbox" checked={isChecked} onChange={() => onChange(title)}/>
-      </label>
-      <span className="list__item__title">{title}</span>
-      <button  className="list__item__remove" onClick={() => onRemove(title)}>Remove</button>
-    </li>
+    <Li className="list__item">
+      <CustomeCheckbox isChecked={isChecked} onChange={onChangeChecked} primaryColor={primaryColor}/>
+      <ItemTitle>{title}</ItemTitle>
+      <RemoveButton
+        primaryColor={primaryColor}
+        primaryTextColor={primaryTextColor}
+        onClick={() => onRemove(title)}
+      >
+        Remove
+      </RemoveButton>
+    </Li>
   );
 }
 
